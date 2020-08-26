@@ -1,0 +1,15 @@
+<view class="mycomponent">
+    <!-- logo -->
+    <navigator class="logo" url="../../pages/index/index" open-type="reLaunch">
+        <image class="logo_img" src="../../images/logo.jpg" mode="widthFix"></image>
+        <image class="title_img" src="../../images/title.jpg" mode="widthFix"></image>
+    </navigator>   
+    <!-- 搜索框 -->
+    <navigator class="search" url="../../pages/search/search">
+        <image class="search_img" src="../../images/search.jpg" mode="widthFix"></image>
+    </navigator>
+    <!-- 用户 -->
+    <navigator class="user" url="../../pages/login/login">
+        <image class="user_img" src="../../images/user.jpg" mode="widthFix"></image>
+    </navigator>
+</view>

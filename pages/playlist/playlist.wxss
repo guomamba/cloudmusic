@@ -1,0 +1,114 @@
+.playlist{
+    background-color: #5A4844;
+}
+.playlist_info{
+    height: 340rpx;
+    display: flex;
+    flex-direction: row;
+}
+.playlist_info image{
+    width: 260rpx;
+    margin: 40rpx;
+    border-radius: 10rpx;
+}
+.playlist_detail{
+    width: 410rpx;
+    display: flex;
+    flex-direction: column;
+}
+.playlist_name{
+    margin-top: 50rpx;
+    font-size: 30rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgb(250, 244, 244);
+}
+.playlist_authorInfo{
+    height: 80rpx;
+    display: flex;
+    flex-direction: row;
+}
+.playlist_authorInfo image{
+    margin-top: 10rpx;
+    margin-left: 0rpx;
+    margin-right: 0rpx;
+    width: 60rpx;
+    border-radius: 50%;
+}
+.author_name{
+    width: 200rpx;
+    margin-top: 25rpx;
+    margin-left: 10rpx;
+    font-size: 26rpx;
+    color: rgb(216, 189, 189);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.playlist_createTime{
+    width: 160rpx;
+    margin-top: 25rpx;
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+    font-size: 26rpx;
+    color:#fff; 
+    text-align: right;
+}
+.playlist_description{
+    height: 120rpx;
+    font-size: 24rpx;
+    color: #b88b8b;
+}
+.musiclist{
+    background-color:#151515;
+    border-top-left-radius: 50rpx;
+    border-top-right-radius: 50rpx;
+}
+.musiclist_title{
+    height: 100rpx;
+    position: relative;
+    border-bottom: 2rpx solid #282828;
+}
+.musiclist_title text{
+    position: absolute;
+    margin: 35rpx;
+    font-size: 30rpx;
+    color: #ffffff;
+}
+.musiclist_item{
+    height: 100rpx;
+    display: flex;
+    flex-direction: row;
+}
+.musiclist_number{
+    width: 100rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.musiclist_number text{
+    font-size: 30rpx;
+    color: rgb(105, 105, 105);
+}
+.musiclist_itemInfo{
+    width: 650rpx;
+    display: flex;
+    flex-direction: column;
+}
+.musiclist_itemInfo_name{
+    margin-top: 15rpx;
+    font-size: 30rpx;
+    color: #ffffff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.musiclist_itemInfo_author{
+    margin-top: 15rpx;
+    font-size: 20rpx;
+    color: rgb(175,175,175);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

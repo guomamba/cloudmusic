@@ -1,0 +1,26 @@
+<wxs src="../../utils/timetransfer.wxs" module="tools"/>
+
+<view class="playlist">
+    <view class="playlist_info">
+        <image src="{{playlist.coverImgUrl}}" mode="widthFix"></image>
+        <view class="playlist_detail">
+            <text class="playlist_name">{{playlist.name}}</text>   
+            <view class="playlist_authorInfo">
+                <image src="{{playlist.creator.avatarUrl}}" mode="widthFix"></image>
+                <text class="author_name">{{playlist.creator.nickname}}</text>
+                <text class="playlist_createTime">{{tools.getDateTime(playlist.createTime,4)}}</text>  
+            </view> 
+            <scroll-view class="playlist_description" scroll-y="{{true}}">{{playlist.description}}</scroll-view >
+        </view>
+    </view>
+    <view class="musiclist">
+        <view class="musiclist_title"><text>歌曲列表</text></view>
+        <navigator class="musiclist_item" wx:for="{{playlist.tracks}}" wx:key="index" url="../play/play?id={{item.id}}&name={{item.name}}">
+            <view class="musiclist_number"><text>{{index+1}}</text></view> 
+            <view class="musiclist_itemInfo">
+                <text class="musiclist_itemInfo_name">{{item.name}}</text>
+                <text class="musiclist_itemInfo_author">{{item.ar[0].name}}</text>
+            </view>
+        </navigator>
+    </view>
+</view>

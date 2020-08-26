@@ -1,0 +1,48 @@
+<view class="main">
+    <view class="searchBar">
+        <view class="searchBar_bg">
+            <form>
+                 <input class="searchBar_input" auto-focus type="text" value="{{inputWords}}" placeholder="搜索歌曲" confirm-type="search" bindconfirm="Search" bindinput="getInputWords" bindfocus="bindfocus" bindblur="bindblur"></input>
+            </form>
+        </view>
+    </view>
+    <view class="hotlist" hidden="{{hotlist_hidden}}">
+        <view class="hotlist_title"><text>热搜榜</text></view>
+        <navigator class="hotlist_lists" wx:for="{{hotlist}}" wx:key="index" url="../search/search?inputWords={{item.searchWord}}" open-type="redirect">
+            <view class="hotlist_item">
+                <view class="item_rank" wx:if="{{index < 3}}">
+                    <text>{{index+1}}</text>
+                </view>
+                <view class="item_rank" wx:if="{{index > 2}}">
+                    <text style="color: #999999">{{index+1}}</text>
+                </view>
+                <view class="item_info">
+                    <view class="item_info_searchWord">{{item.searchWord}}</view>
+                    <view class="item_info_content">{{item.content}}</view>
+                </view>
+                <view class="item_score">{{item.score}}</view>
+            </view>
+        </navigator> 
+    </view>
+    <view class="allMatchlist" hidden="{{allMatchlist_hidden}}">
+        <view class="allMatchlist_title" bind:tap="Search">搜索“{{inputWords}}”</view>
+        <navigator class="allMatchlist_item" wx:for="{{allMatchlist}}" wx:key="index"> 
+            <view class="allMatchlist_item_image">
+                <image src="../../images/search_mini.png" mode="widthFix"></image>
+            </view>
+            <view class="allMatchlist_item_ketword">{{item.keyword}}</view>
+        </navigator>
+    </view>
+    <view class="searchlist" hidden="{{searchlist_hidden}}">
+        <navigator class="searchlist_item" wx:for="{{searchlist}}" wx:key="index" url="../play/play?id={{item.id}}&name={{item.name}}">
+            <view class="searchlist_itemInfo">
+                <view class="searchlist_itemInfo_title">{{item.name}}</view>
+                <view class="searchlist_itemInfo_info">{{item.album.name}}</view>
+            </view>
+            <view class="searchlist_itemImg">
+                <image src="../../images/play.png" mode="widthFix"></image>
+            </view>
+        </navigator>
+    </view>
+</view>
+

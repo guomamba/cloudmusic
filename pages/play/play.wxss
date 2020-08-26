@@ -1,0 +1,175 @@
+/* pages/play/play.wxss */
+.main{
+    padding: 0rpx;
+    background-color: #242424;
+    width: 100%;
+    /* height: 100vh; */
+}
+.logo{
+    height: 80rpx;
+}
+.logo_img{
+    width: 60rpx;
+    border-radius: 50%;
+    margin: 10rpx;
+}
+.title_img{
+    width: 200rpx;
+    margin-bottom: 10rpx;
+}
+
+.turntable{
+    width: 550rpx;
+    height: 550rpx;
+    margin: 100rpx;
+    background-color: #000000;
+    /* background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596469108565&di=074d7b6c8a70a2c4215fbf4ad7d7f9d4&imgtype=0&src=http%3A%2F%2F201905.oss-cn-hangzhou.aliyuncs.com%2Fcto%2F5362870-bf0859c0475970906b3a01cd3e67d266.png); */
+    background-size:550rpx 550rpx;
+    border-radius: 50%;
+}
+.turntable_img{
+    width: 380rpx;
+    margin: 85rpx;
+    border-radius: 50%;
+    position: relative;
+}
+.turntable_btn{
+    width: 150rpx;
+    height: 150rpx;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+.similist{
+    width: 100%;
+}
+.similist_title{
+    height: 80rpx;
+}
+.similist_title text{
+    margin: 20rpx;
+    font-size: 40rpx;
+    color: #ffffff;
+}
+.similist_item{
+    height: 150rpx;
+    display: flex;
+    flex-direction: row;
+}
+.similist_itemImg{
+    width: 150rpx;
+}
+.similist_itemImg image{
+    width: 90rpx;
+    margin: 30rpx;
+    border-radius: 10rpx;
+}
+.similist_itemInfo{
+    width: 500rpx;
+    display: flex;
+    flex-direction: column;
+}
+.similist_itemInfo_title{
+    height: 50%;
+    font-size: 30rpx;
+    color: #ffffff;
+    margin-top: 25rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.similist_itemInfo_artist{
+    height: 50%;
+    font-size: 25rpx;
+    color: #A1A1A1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+.similist_itemPlay{
+    width: 100rpx;
+}
+.similist_itemPlay image{
+    width: 60rpx;
+    margin-top: 45rpx;
+    margin-left: 20rpx;
+}
+.comment{
+    width: 100%;
+}
+.comment_title{
+    height: 80rpx;
+}
+.comment_title text{
+    margin: 20rpx;
+    font-size: 40rpx;
+    color: #ffffff;
+}
+.comment_item{
+    display: flex;
+    flex-direction: row;
+}
+.comment_itemImg{
+    width: 120rpx;
+}
+.comment_itemImg image{
+    width: 70rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+}
+.comment_itemInfo{
+    width: 630rpx;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #232429;
+    margin-right: 20rpx;
+}
+.comment_itemInfo_top{
+    height: 90rpx;
+    display: flex;
+    flex-direction: row;
+    margin-top: 15rpx;
+}
+.comment_itemInfo_top_left{
+    width: 480rpx;
+    display: flex;
+    flex-direction: column;
+}
+.comment_itemInfo_name{
+    height: 50rpx;
+    font-size: 30rpx;
+    color: #BBBAAA;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+.comment_itemInfo_time{
+    height: 30rpx;
+    font-size: 20rpx;
+    color: #717158;
+}
+.comment_itemNum{
+    width: 150rpx;
+    display: flex;
+    flex-direction: row;
+    margin-top: 15rpx;
+}
+.comment_itemNum text{
+    width: 110rpx;
+    text-align: right;
+    margin-right: 5rpx;
+    font-size: 30rpx;
+    color: #9C9984;
+}
+.comment_itemNum image{
+    width: 40rpx;
+}
+.comment_itemInfo_content{
+    height: fit-content;
+    font-size: 35rpx;
+    color: #ffffff;
+    margin-bottom: 40rpx;
+}

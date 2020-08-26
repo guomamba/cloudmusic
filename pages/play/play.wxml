@@ -1,0 +1,52 @@
+<wxs src="../../utils/timetransfer.wxs" module="tools"/>
+
+<view class='main'>
+    <view class="logo" url="../../pages/index/index">
+        <image class="logo_img" src="../../images/logo.jpg" mode="widthFix"></image>
+        <image class="title_img" src="../../images/title.jpg" mode="widthFix"></image>
+    </view>   
+    <view class="turntable">
+        <image class="turntable_img" src="{{musicPicUrl}}" animation="{{animation}}" mode="widthFix">
+            <image class="turntable_btn" src="{{buttonImage}}" animation="{{animation1}}" bind:tap="MusicControl" mode="widthFix"></image>
+        </image>
+    </view>
+    <!-- todo(歌词滚动) -->
+    <!-- <view class="lyric">{{lyric}}</view> -->
+    <view class="similist">
+        <view class="similist_title"><text>喜欢这首歌的人也听</text></view>
+        <navigator class="similist_item" wx:for="{{similist}}" wx:key="index" url="../play/play?id={{item.album.id}}&name={{item.album.name}}"> 
+            <view class="similist_itemImg">
+                <image src="{{item.album.blurPicUrl}}" mode="widthFix"></image>
+            </view>
+            <view class="similist_itemInfo">
+                <view class="similist_itemInfo_title">{{item.album.name}}</view>
+                <view class="similist_itemInfo_artist" >{{item.album.artists[0].name}}</view>
+                <!-- wx:for="{{item.album.artists}}" wx:for-item="artist" wx:key="index"  -->
+            </view>
+            <view class="similist_itemPlay">
+                <image src="../../images/play.png" mode="widthFix"></image>
+            </view>
+        </navigator>
+    </view>
+    <view class="comment">
+        <view class="comment_title"><text>精彩评论</text></view>
+        <view class="comment_item" wx:for="{{hotComments}}" wx:key="index">
+            <view class="comment_itemImg">
+                <image src="{{item.user.avatarUrl}}" mode="widthFix"></image>
+            </view>
+            <view class="comment_itemInfo">
+                <view class="comment_itemInfo_top">
+                    <view class="comment_itemInfo_top_left">
+                        <view class="comment_itemInfo_name">{{item.user.nickname}}</view>
+                        <view class="comment_itemInfo_time">{{tools.getDateTime(item.time,2)}}</view>
+                    </view>
+                    <view class="comment_itemNum">
+                        <text>{{item.likedCount}}</text>
+                        <image src="../../images/zan.png" mode="widthFix"></image>
+                    </view>
+                </view>
+                <view class="comment_itemInfo_content"><text decode="{{true}}">{{item.content}}</text></view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,34 @@
+.mycomponent{
+    display: flex;
+    align-items: center;
+    padding: 10rpx;
+    background-color: #242424;
+}
+.logo{
+    height: 60rpx;
+}
+.logo_img{
+    width: 50rpx;
+    border-radius: 50%;
+    margin-top: 5rpx;
+}
+.title_img{
+    width: 180rpx;
+    margin-left: 5rpx;
+}
+.search{
+    height: 60rpx;
+}
+.search_img{
+    width: 200rpx;
+    margin-left: 240rpx;
+}
+.user{
+    height: 60rpx;
+}
+.user_img{
+    width: 50rpx;
+    border-radius: 50%;
+    margin-top: 5rpx;
+    margin-left: 5rpx;
+}

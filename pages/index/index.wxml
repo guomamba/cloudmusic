@@ -1,0 +1,84 @@
+<wxs src="../../utils/timetransfer.wxs" module="tools"/>
+
+<view class="main">
+  <!-- 公共头部 -->
+  <mycomponent></mycomponent>
+  <!-- 首页导航 -->
+  <view class="top">
+    <scroll-view class="top_scroll" scroll-x="{{true}}">
+      <view bind:tap="activeNav" class="scroll_item {{index===currentIndexNav?'active':''}}" wx:for="{{navList}}" wx:key="index" data-index="{{index}}">
+        {{item.text}}
+      </view>    
+    </scroll-view>
+  </view>
+  <!-- 每日推荐音乐列表 -->
+  <view class="musiclist" hidden="{{navList_hidden[0]}}">
+    <navigator class="musiclist_item" wx:for="{{dailySongs}}" wx:key="index" url="../play/play?id={{item.id}}&name={{item.name}}">
+      <view class="item_music">
+        <image mode="widthFix" src="{{item.al.picUrl}}"></image>
+      </view>
+      <view class="item_info">
+        <text class="item_name">{{item.name}}</text>
+        <view class="item_artists">
+          <text class="item_artist" wx:for="{{item.ar}}" wx:for-item="itemName" wx:key="index">
+            <text wx:if="{{index<item.ar.length-1}}">{{itemName.name}}/</text>
+            <text wx:else>{{itemName.name}}</text>
+          </text>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <!-- 热门歌单 -->
+  <view class="playlist" hidden="{{navList_hidden[1]}}">
+    <navigator class="playlist_item" wx:for="{{topPlaylists}}" wx:key="index" url="../playlist/playlist?id={{item.id}}&type=0">
+      <view class="playlist_itemInfo">
+        <view class="playlist_itemInfo_img">
+          <image src="{{item.coverImgUrl}}" mode="widthFix">
+            <text>{{tools.getNumber(item.playCount)}}</text>
+          </image>
+        </view> 
+        <view class="playlist_itemInfo_title">{{item.name}}</view> 
+      </view>
+    </navigator>
+  </view>
+  <!-- 所有榜单 -->
+  <view class="alllist" hidden="{{navList_hidden[2]}}">
+    <navigator class="alllist_item" wx:for="{{allList}}" wx:key="index" url="../playlist/playlist?id={{item.id}}&type=1">
+      <view class="alllist_itemInfo">
+        <view class="alllist_itemInfo_img">
+          <image src="{{item.coverImgUrl}}" mode="widthFix">
+            <text>{{item.updateFrequency}}</text>
+          </image>
+        </view> 
+        <view class="alllist_itemInfo_title">{{item.name}}</view> 
+      </view>
+    </navigator>
+  </view>
+  <!-- 歌手 -->
+  <view class="artist" hidden="{{navList_hidden[3]}}">
+    <!-- <view class="artist_title"><text>全部歌手</text></view> -->
+    <view class="artist_title"><text>热门歌手</text></view>
+    <view class="artist_list">
+      <navigator class="artist_item" wx:for="{{topArtist}}" wx:key="index" url="../artist/artist?id={{item.id}}&name={{item.name}}">
+        <view class="artist_itemInfo">
+          <image src="{{item.img1v1Url}}" mode="widthFix"></image>
+          <text>{{item.name}}</text>
+        </view>
+      </navigator>
+    </view>
+  </view>
+  <!-- 热门电台 -->
+  <view class="hotdj" hidden="{{navList_hidden[4]}}">
+    <navigator class="hotdj_item" wx:for="{{djRadios}}" wx:key="index" url="../dj/dj?id={{item.id}}">   
+      <view class="hotdj_itemInfo">
+        <image src="{{item.picUrl}}" mode="widthFix"></image>
+        <view class="hotdj_itemInfo_detail">
+          <text class="detail_name">{{item.name}}</text>
+          <text class="detail_rcmdtext" wx:if="{{item.rcmdtext==null}}">什么都没有</text>
+          <text class="detail_rcmdtext" wx:else>{{item.rcmdtext}}</text>
+          <text class="detail_subCount">订阅：{{tools.getNumber(item.subCount,1)}}</text>
+        </view>
+      </view>
+    </navigator>
+  </view>
+</view>
