@@ -1,5 +1,6 @@
 // pages/play/play.js
 const innerAudioContext  = wx.createInnerAudioContext();
+const backAudioManager = wx.getBackgroundAudioManager();
 var time = require('../../utils/util.js');
 var app =  getApp();
 
@@ -9,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    musicName: '',
     musicSrc: '',
     musicPicUrl : '',
     buttonImage: '../../images/btn_pause.png',
@@ -62,13 +64,15 @@ Page({
         buttonImage: '../../images/btn_play.png',
         isPlay: true
       })
-      innerAudioContext.src = this.data.musicSrc
-      innerAudioContext.play();
-      innerAudioContext.onPlay(()=>{
+
+      backAudioManager.title = this.data.musicName
+      backAudioManager.src = this.data.musicSrc
+      backAudioManager.play();
+      backAudioManager.onPlay(()=>{
         //console.log("开始播放")
         this.setData({
-          currentTime: innerAudioContext.currentTime,
-          currentAngle: 180 / 5000 * innerAudioContext.currentTime * 1000
+          currentTime: backAudioManager.currentTime,
+          currentAngle: 180 / 5000 * backAudioManager.currentTime * 1000
         })
       });
       this.animation.rotate(180 / 5000 * this.data.duration).step({
@@ -87,8 +91,8 @@ Page({
         buttonImage: '../../images/btn_pause.png',
         isPlay: false
       })
-      innerAudioContext.pause();
-      innerAudioContext.onPause(()=>{
+      backAudioManager.pause();
+      backAudioManager.onPause(()=>{
         //console.log("暂停")
         //console.log(this.data.currentAngle)
       });
@@ -156,6 +160,9 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: options.name
+    })
+    this.setData({
+      musicName: options.name
     })
     this.getMusicSrc(options.id)
     this.getMusicDetail(options.id)
