@@ -1,8 +1,8 @@
 <wxs src="../../utils/timetransfer.wxs" module="tools"/>
 
-<view class="main" bind:touchstart="touchstart" bind:touchend="touchend">
-  <!-- 公共头部 -->
-  <mycomponent></mycomponent>
+<view class="main">
+  <!-- 头部 -->
+  <mycomponent></mycomponent> 
   <!-- 首页导航 -->
   <view class="top">
     <scroll-view class="top_scroll" scroll-x="{{true}}">

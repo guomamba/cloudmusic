@@ -20,16 +20,30 @@ Page({
   //获取歌单详情
   getPlaylistDetail(id){
     let that = this
-    wx.request({
-      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/playlist/detail?id='+id,
-      success: function(res) {
-        if(res.data.code===200){
-          that.setData({
-            playlist: res.data.playlist
-          })
+    if(app.globalData.isLogin){
+      wx.request({
+        url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/playlist/detail?id='+id+'&cookie='+app.globalData.cookie,
+        success: function(res) {
+          if(res.data.code===200){
+            that.setData({
+              playlist: res.data.playlist
+            })
+          }
         }
-      }
-    })
+      })
+    }
+    else{
+      wx.request({
+        url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/playlist/detail?id='+id,
+        success: function(res) {
+          if(res.data.code===200){
+            that.setData({
+              playlist: res.data.playlist
+            })
+          }
+        }
+      })
+    }
   },
 
   /**

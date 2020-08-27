@@ -5,7 +5,10 @@ App({
       'http://localhost:3000',
       'http://www.hjmin.com'
     ],
-    dataSourcetype: 0
+    dataSourcetype: 1,
+    isLogin: false,
+    src: '../../images/user.jpg',
+    cookie: ''
   },
 
   /**

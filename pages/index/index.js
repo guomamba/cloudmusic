@@ -40,7 +40,7 @@ Page({
       startY: null,
       endX: null,
       endY: null
-    }
+    },
   },
 
   touchstart(e){
@@ -77,36 +77,12 @@ Page({
     })
   },
   
-  //获取登录信息
-  getLoginStatus(){
-    let that = this;
+  getUserDetail(id){
+    let that = this
     wx.request({
-      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/login/status',
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/user/detail?uid='+id,
       success: function(res) {
-        if(res.data.code===301){
-          console.log("需要登陆！")
-          that.getLoginInfo()
-        }
-        if(res.data.code===200){
-          console.log("已登录！")
-        }
-      }
-    })
-  },
-
-  //登录
-  getLoginInfo(){
-    let that = this;   
-    wx.request({
-      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/login/cellphone?phone=15915301322&md5_password=2c06a779625c86a00756b342cbf9c1b8',
-      success: function(res) {
-        if(res.data.code===200){
-          console.log("登录成功！")
-          that.setData({
-            userAvatarUrl: res.data.profile.avatarUrl,
-            cookie: res.data.cookie
-          })
-        }
+        console.log(res)
       }
     })
   },
@@ -114,23 +90,37 @@ Page({
   //获取每日推荐歌曲
   getDailySongs(){
     let that = this;
-    wx.request({
-      url: 'https://www.fastmock.site/mock/110cab20463444af7b9baf258a742c29/music/recommend/songs',
-      success: function(res) {  
-        if(res.data.code===200){
-          that.setData({
-            dailySongs: res.data.data.dailySongs
-          })
+    if(app.globalData.isLogin){
+      wx.request({
+        url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/recommend/songs?cookie='+app.globalData.cookie,
+        success: function(res) {  
+          if(res.data.code===200){
+            that.setData({
+              dailySongs: res.data.data.dailySongs
+            })
+          }
         }
-      }
-    })
+      })
+    }
+    else{
+      wx.request({
+        url: 'https://www.fastmock.site/mock/110cab20463444af7b9baf258a742c29/music/recommend/songs',
+        success: function(res) {  
+          if(res.data.code===200){
+            that.setData({
+              dailySongs: res.data.data.dailySongs
+            })
+          }
+        }
+      })
+    }
   },
 
   //获取热门歌单
   getTopPlaylist(){
     let that = this
     wx.request({
-      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/top/playlist/highquality?limit=51',
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/top/playlist?limit=51',
       success: function(res) {
         if(res.data.code===200){
           that.setData({
@@ -200,6 +190,12 @@ Page({
       title: '加载中...',
       mask: true
     });
+    this.setData({
+      src: app.globalData.src
+    })
+    if(options.id!==undefined){
+      this.getUserDetail(options.id)
+    }
   },
 
   /**

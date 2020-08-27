@@ -10,6 +10,6 @@
     </navigator>
     <!-- 用户 -->
     <navigator class="user" url="../../pages/login/login">
-        <image class="user_img" src="../../images/user.jpg" mode="widthFix"></image>
+        <image class="user_img" src="{{src}}" mode="widthFix"></image>
     </navigator>
 </view>
