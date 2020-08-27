@@ -1,1 +1,82 @@
 /* pages/artist/artist.wxss */
+.artist{
+    background-color: #5A4844;
+}
+.artistInfo{
+    width: 100%;
+    height: 560rpx;
+    position: relative;
+    overflow: hidden;
+}
+.artistInfo_Img{
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+.artiistInfo_brief{
+    width: 300rpx;
+    height: 130rpx;
+    font-size: 25rpx;
+    position: absolute;
+    top: 0;bottom: 0;left: 0;right: 0;
+    margin-top: 420rpx;
+    margin-left: 30rpx;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; 
+}
+.songList{
+    background-color:#151515;
+    border-top-left-radius: 50rpx;
+    border-top-right-radius: 50rpx;
+}
+.songList_title{
+    height: 100rpx;
+    position: relative;
+    border-bottom: 2rpx solid #282828;
+}
+.songList_title text{
+    position: absolute;
+    margin: 35rpx;
+    font-size: 30rpx;
+    color: #ffffff;
+}
+.songList_item{
+    height: 100rpx;
+    display: flex;
+    flex-direction: row;
+}
+.songList_number{
+    width: 100rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.songList_number text{
+    font-size: 30rpx;
+    color: rgb(105, 105, 105);
+}
+.songList_itemInfo{
+    width: 650rpx;
+    display: flex;
+    flex-direction: column;
+}
+.songList_itemInfo_name{
+    margin-top: 15rpx;
+    font-size: 30rpx;
+    color: #ffffff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.songList_itemInfo_author{
+    margin-top: 15rpx;
+    font-size: 20rpx;
+    color: rgb(175,175,175);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

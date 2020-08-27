@@ -57,11 +57,15 @@
     height: 60%;
     font-size: 40rpx; 
     margin-top: 16rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
 }
 .item_info_content{
-    height: 40%;
+    height: 36%;
     color: #A1A1A1;
     font-size: 25rpx;
+    overflow: hidden;
 }
 .item_score{
     width: 200rpx;

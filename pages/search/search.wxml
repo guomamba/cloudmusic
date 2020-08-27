@@ -26,12 +26,12 @@
     </view>
     <view class="allMatchlist" hidden="{{allMatchlist_hidden}}">
         <view class="allMatchlist_title" bind:tap="Search">搜索“{{inputWords}}”</view>
-        <navigator class="allMatchlist_item" wx:for="{{allMatchlist}}" wx:key="index"> 
+        <div class="allMatchlist_item" wx:for="{{allMatchlist}}" wx:key="index" bind:tap="keyword" data-keyword="{{item.keyword}}"> 
             <view class="allMatchlist_item_image">
                 <image src="../../images/search_mini.png" mode="widthFix"></image>
             </view>
             <view class="allMatchlist_item_ketword">{{item.keyword}}</view>
-        </navigator>
+        </div>
     </view>
     <view class="searchlist" hidden="{{searchlist_hidden}}">
         <navigator class="searchlist_item" wx:for="{{searchlist}}" wx:key="index" url="../play/play?id={{item.id}}&name={{item.name}}">

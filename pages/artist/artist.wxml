@@ -1,2 +1,17 @@
 <!--pages/artist/artist.wxml-->
-<text>pages/artist/artist.wxml</text>
+<view class="artist">
+    <view class="artistInfo">
+        <image class="artistInfo_Img" src="{{imgSrc}}" mode="widthFix"></image>
+        <text class="artiistInfo_brief" bind:tap="showBriefdetail">{{briefDesc}}</text>
+    </view>
+    <view class="songList">
+        <view class="songList_title"><text>歌曲</text></view>
+        <navigator class="songList_item" wx:for="{{songs}}" wx:key="index" url="../play/play?id={{item.id}}&name={{item.name}}">
+            <view class="songList_number"><text>{{index+1}}</text></view> 
+            <view class="songList_itemInfo">
+                <text class="songList_itemInfo_name">{{item.name}}</text>
+                <text class="songList_itemInfo_author">{{item.ar[0].name}}</text>
+            </view>
+        </navigator>
+    </view>
+</view>

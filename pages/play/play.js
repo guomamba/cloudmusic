@@ -1,6 +1,7 @@
 // pages/play/play.js
 const innerAudioContext  = wx.createInnerAudioContext();
 var time = require('../../utils/util.js');
+var app =  getApp();
 
 Page({
 
@@ -20,18 +21,13 @@ Page({
     lyric: '',
     similist: [],
     hotComments: [],
-    dataSource: [
-      'http://localhost:3000',
-      'http://www.hjmin.com'
-    ],
-    dataSourcetype: 1
   },
 
   //获取音乐 url
   getMusicSrc(id){
     let that = this
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/song/url?id='+id,
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/song/url?id='+id,
       success: function(res) {
         if(res.data.code===200){
           console.log("获取url成功！")
@@ -47,7 +43,7 @@ Page({
   getMusicDetail(id){
     let that = this
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/song/detail?ids='+id,
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/song/detail?ids='+id,
       success: function(res) {
         if(res.data.code===200){
           that.setData({
@@ -113,7 +109,7 @@ Page({
   getMusicLyric(id){
     let that = this;
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/lyric?id='+id,
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/lyric?id='+id,
       success: function(res) {
         if(res.data.code===200){
           that.setData({
@@ -128,7 +124,7 @@ Page({
   getSimilarMusic(id){
     let that = this
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/simi/song?id='+id,
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/simi/song?id='+id,
       success: function(res) {
         if(res.data.code===200){
           that.setData({
@@ -143,7 +139,7 @@ Page({
   getMusicCommrnt(id){
     let that = this
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/comment/music?id='+id+'&limit=0',
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/comment/music?id='+id+'&limit=0',
       success: function(res) {
         if(res.data.code===200){
           that.setData({
@@ -166,11 +162,6 @@ Page({
     //this.getMusicLyric(options.id)
     this.getSimilarMusic(options.id)
     this.getMusicCommrnt(options.id)
-
-    //获取当前系统时间
-    var timestamps = Math.round(new Date().getTime() / 1000).toString();
-    //将时间戳转换为时间格式
-    time.formatTimeTwo(timestamps,'Y年M月D日 h:m:s');
   },
 
   /**

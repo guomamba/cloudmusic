@@ -1,11 +1,52 @@
 // pages/artist/artist.js
+var app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    imgSrc: '',
+    songs: [],
+    briefDesc: '',
+  },
 
+  //获取歌手信息
+  getArtistInfo(id){
+    let that = this
+    wx.request({
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/artist/desc?id='+id,
+      success: function(res) {
+        if(res.data.code===200){
+          that.setData({
+            briefDesc: res.data.briefDesc
+          })
+        }
+      }
+    })
+  },
+
+  //获取歌手热门歌曲
+  getArtistTopSong(id){
+    let that = this
+    wx.request({
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/artist/top/song?id='+id,
+      success: function(res) {
+        if(res.data.code===200){
+          that.setData({
+            songs: res.data.songs
+          })
+        }
+      }
+    })
+  },
+
+  showBriefdetail(){
+    wx.showModal({
+      title: '基本信息',
+      content: this.data.briefDesc,
+    })
   },
 
   /**
@@ -14,7 +55,12 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: options.name
-    });
+    });   
+    this.setData({
+      imgSrc: decodeURIComponent(options.src)
+    })
+    this.getArtistTopSong(options.id)
+    this.getArtistInfo(options.id)
   },
 
   /**

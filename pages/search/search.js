@@ -1,4 +1,6 @@
 // pages/search/search.js
+var app =  getApp();
+
 Page({
 
   /**
@@ -12,18 +14,13 @@ Page({
     searchlist_hidden: true,
     allMatchlist: [],
     allMatchlist_hidden: true,
-    dataSource: [
-      'http://localhost:3000',
-      'http://www.hjmin.com'
-    ],
-    dataSourcetype: 1
   },
 
   //获取热门搜索
   getHotLists(){
     let that = this
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/search/hot/detail',
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/search/hot/detail',
       success: function(res) {
         if(res.data.code===200){
           that.setData({
@@ -44,7 +41,7 @@ Page({
       })
       let that = this
       wx.request({
-        url: this.data.dataSource[this.data.dataSourcetype]+'/search?keywords='+this.data.inputWords,
+        url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/search?keywords='+this.data.inputWords,
         success: function(res) {
           if(res.data.code===200){
             that.setData({
@@ -54,6 +51,13 @@ Page({
         }
       })
     }
+  },
+
+  keyword(e){
+    this.setData({
+      inputWords: e.currentTarget.dataset.keyword
+    })
+    this.Search()
   },
 
   bindfocus(){
@@ -81,7 +85,7 @@ Page({
       })
       let that = this
       wx.request({
-        url: 'http://localhost:3000/search/suggest?keywords='+e.detail.value+'&type=mobile',
+        url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/search/suggest?keywords='+e.detail.value+'&type=mobile',
         success: function(res) {
           if(res.data.code===200){
             that.setData({

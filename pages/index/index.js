@@ -1,5 +1,7 @@
-Page({
+var app =  getApp();
 
+Page({
+  
   /**
    * 页面的初始数据
    */
@@ -17,10 +19,12 @@ Page({
     },{
       id: 3,
       text: "歌手"
-    },{
-      id: 4,
-      text: "电台"
-    }],
+    },
+    // {
+    //   id: 4,
+    //   text: "电台"   //无法获取电台节目url
+    // }
+    ],
     //被点击菜单索引
     currentIndexNav: 0,
     userAvatarUrl: '../../images/user.jpg',
@@ -31,12 +35,26 @@ Page({
     topArtist: [],
     djRadios: [],
     navList_hidden: [false,true,true,true,true],
-    dataSource: [
-      'http://localhost:3000',
-      'http://www.hjmin.com',
-      'https://www.fastmock.site/mock/110cab20463444af7b9baf258a742c29/music',
-    ],
-    dataSourcetype: 1
+    coordinate: {
+      startX: null,
+      startY: null,
+      endX: null,
+      endY: null
+    }
+  },
+
+  touchstart(e){
+    this.setData({
+      startX: e.changedTouches[0].clientX,
+      startY: e.changedTouches[0].clientY
+    })
+  },
+
+  touchend(e){
+    this.setData({
+      endX: e.changedTouches[0].clientX,
+      endY: e.changedTouches[0].clientY
+    })
   },
 
   //点击首页导航按钮切换选中菜单
@@ -63,7 +81,7 @@ Page({
   getLoginStatus(){
     let that = this;
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/login/status',
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/login/status',
       success: function(res) {
         if(res.data.code===301){
           console.log("需要登陆！")
@@ -80,7 +98,7 @@ Page({
   getLoginInfo(){
     let that = this;   
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/login/cellphone?phone=15915301322&md5_password=2c06a779625c86a00756b342cbf9c1b8',
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/login/cellphone?phone=15915301322&md5_password=2c06a779625c86a00756b342cbf9c1b8',
       success: function(res) {
         if(res.data.code===200){
           console.log("登录成功！")
@@ -97,7 +115,7 @@ Page({
   getDailySongs(){
     let that = this;
     wx.request({
-      url: this.data.dataSource[2]+'/recommend/songs',
+      url: 'https://www.fastmock.site/mock/110cab20463444af7b9baf258a742c29/music/recommend/songs',
       success: function(res) {  
         if(res.data.code===200){
           that.setData({
@@ -112,7 +130,7 @@ Page({
   getTopPlaylist(){
     let that = this
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/top/playlist/highquality?limit=51',
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/top/playlist/highquality?limit=51',
       success: function(res) {
         if(res.data.code===200){
           that.setData({
@@ -127,7 +145,7 @@ Page({
   getAllList(){
     let that = this
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/toplist',
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/toplist',
       success: function(res) {
         if(res.data.code===200){
           that.setData({
@@ -142,7 +160,7 @@ Page({
   getTopArtist(){
     let that = this
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/top/artists',
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/top/artists',
       success: function(res) {
         if(res.data.code===200){
           that.setData({
@@ -157,7 +175,7 @@ Page({
   getHotdjRadios(){
     let that = this
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/dj/hot',
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/dj/hot',
       success: function(res) {
         if(res.data.code===200){
           that.setData({
@@ -176,7 +194,7 @@ Page({
     this.getDailySongs()
     this.getTopPlaylist()
     this.getAllList()
-    this.getHotdjRadios()
+    //this.getHotdjRadios()
     this.getTopArtist()
     wx.showLoading({
       title: '加载中...',

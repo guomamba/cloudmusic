@@ -1,15 +1,12 @@
 // pages/playlist/playlist.js
+var app =  getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    dataSource: [
-      'http://localhost:3000',
-      'http://www.hjmin.com'
-    ],
-    dataSourcetype: 1,
     playlist: {},
   },
 
@@ -17,7 +14,7 @@ Page({
   getPlaylistDetail(id){
     let that = this
     wx.request({
-      url: this.data.dataSource[this.data.dataSourcetype]+'/playlist/detail?id='+id,
+      url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/playlist/detail?id='+id,
       success: function(res) {
         if(res.data.code===200){
           that.setData({

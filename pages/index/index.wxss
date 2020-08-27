@@ -1,7 +1,7 @@
 /* 导航栏 */
-.main{
+/* .main{
   overflow-x:hidden;
-}
+} */
 .top{
   padding: 0rpx;
   background-color: #666666;

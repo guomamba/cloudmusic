@@ -36,8 +36,14 @@ var number = {
         }
     }
 }
+var url = {
+    encodeURI: function(value){
+        return encodeURIComponent(value)
+    }
+}
 // 导出对外暴露的属性
 module.exports = {
     getDateTime: datatime.getDateTime,
-    getNumber: number.getNumber
+    getNumber: number.getNumber,
+    encodeURI: url.encodeURI
 }

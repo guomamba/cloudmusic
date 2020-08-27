@@ -14,13 +14,14 @@
     <!-- <view class="lyric">{{lyric}}</view> -->
     <view class="similist">
         <view class="similist_title"><text>喜欢这首歌的人也听</text></view>
-        <navigator class="similist_item" wx:for="{{similist}}" wx:key="index" url="../play/play?id={{item.album.id}}&name={{item.album.name}}"> 
+        <!-- 传递相似歌曲id -->
+        <navigator class="similist_item" wx:for="{{similist}}" wx:key="index" url="../play/play?id={{item.id}}&name={{item.name}}"> 
             <view class="similist_itemImg">
                 <image src="{{item.album.blurPicUrl}}" mode="widthFix"></image>
             </view>
             <view class="similist_itemInfo">
-                <view class="similist_itemInfo_title">{{item.album.name}}</view>
-                <view class="similist_itemInfo_artist" >{{item.album.artists[0].name}}</view>
+                <view class="similist_itemInfo_title">{{item.name}}</view>
+                <view class="similist_itemInfo_artist" >{{item.artists[0].name}}</view>
                 <!-- wx:for="{{item.album.artists}}" wx:for-item="artist" wx:key="index"  -->
             </view>
             <view class="similist_itemPlay">
