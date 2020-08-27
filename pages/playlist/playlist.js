@@ -10,6 +10,13 @@ Page({
     playlist: {},
   },
 
+  description(){
+    wx.showModal({
+      title: '详情',
+      content: this.data.playlist.description,
+    })
+  },
+
   //获取歌单详情
   getPlaylistDetail(id){
     let that = this

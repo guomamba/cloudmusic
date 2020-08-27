@@ -10,7 +10,7 @@
                 <text class="author_name">{{playlist.creator.nickname}}</text>
                 <text class="playlist_createTime">{{tools.getDateTime(playlist.createTime,4)}}</text>  
             </view> 
-            <scroll-view class="playlist_description" scroll-y="{{true}}">{{playlist.description}}</scroll-view >
+            <view class="playlist_description" bind:tap="description">{{playlist.description}}</view>
         </view>
     </view>
     <view class="musiclist">

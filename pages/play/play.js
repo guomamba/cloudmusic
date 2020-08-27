@@ -1,5 +1,4 @@
 // pages/play/play.js
-const innerAudioContext  = wx.createInnerAudioContext();
 const backAudioManager = wx.getBackgroundAudioManager();
 var time = require('../../utils/util.js');
 var app =  getApp();
@@ -12,7 +11,7 @@ Page({
   data: {
     musicName: '',
     musicSrc: '',
-    musicPicUrl : '',
+    musicPicUrl : '../../images/album.jpg',
     buttonImage: '../../images/btn_pause.png',
     isPlay: false,
     animation: '',
@@ -32,10 +31,15 @@ Page({
       url: app.globalData.dataSource[app.globalData.dataSourcetype]+'/song/url?id='+id,
       success: function(res) {
         if(res.data.code===200){
-          console.log("获取url成功！")
-          that.setData({
-            musicSrc: res.data.data[0].url
-          })
+          if(res.data.data[0].url!==null){
+            console.log("获取url成功！")
+            that.setData({
+              musicSrc: res.data.data[0].url
+            })
+          }
+          else{
+            console.log("未获取到可以播放的url")
+          }
         }
       }
     })
@@ -49,9 +53,13 @@ Page({
       success: function(res) {
         if(res.data.code===200){
           that.setData({
-            musicPicUrl: res.data.songs[0].al.picUrl,
             duration: res.data.songs[0].dt
           })
+          if(res.data.songs[0].al.picUrl!==null){
+            that.setData({
+              musicPicUrl: res.data.songs[0].al.picUrl,
+            })
+          }
         }
       }
     })
@@ -60,52 +68,61 @@ Page({
   //音乐控制
   MusicControl(){
     if(this.data.isPlay===false){
-      this.setData({
-        buttonImage: '../../images/btn_play.png',
-        isPlay: true
-      })
-
-      backAudioManager.title = this.data.musicName
-      backAudioManager.src = this.data.musicSrc
-      backAudioManager.play();
-      backAudioManager.onPlay(()=>{
-        //console.log("开始播放")
+      if(this.data.musicSrc!==''){
         this.setData({
-          currentTime: backAudioManager.currentTime,
-          currentAngle: 180 / 5000 * backAudioManager.currentTime * 1000
+          buttonImage: '../../images/btn_play.png',
+          isPlay: true
         })
-      });
-      this.animation.rotate(180 / 5000 * this.data.duration).step({
-        duration: this.data.duration - this.data.currentTime * 1000               
-      })
-      this.animation1.rotate(-180 / 5000 * this.data.duration).step({
-        duration: this.data.duration - this.data.currentTime * 1000              
-      })
-      this.setData({
-        animation: this.animation.export(),
-        animation1: this.animation1.export()
-      })
+        backAudioManager.title = this.data.musicName
+        backAudioManager.src = this.data.musicSrc
+        backAudioManager.play();
+        backAudioManager.onPlay(()=>{
+          //console.log("开始播放")
+          this.setData({
+            currentTime: backAudioManager.currentTime,
+            currentAngle: 180 / 5000 * backAudioManager.currentTime * 1000
+          })
+        });
+        this.animation.rotate(180 / 5000 * this.data.duration).step({
+          duration: this.data.duration - this.data.currentTime * 1000               
+        })
+        this.animation1.rotate(-180 / 5000 * this.data.duration).step({
+          duration: this.data.duration - this.data.currentTime * 1000              
+        })
+        this.setData({
+          animation: this.animation.export(),
+          animation1: this.animation1.export()
+        })
+      }
+      else{
+        wx.showToast({
+          title: '播放失败',
+          icon: 'none'
+        })
+      }
     }
     else if(this.data.isPlay===true){
       this.setData({
         buttonImage: '../../images/btn_pause.png',
         isPlay: false
       })
-      backAudioManager.pause();
-      backAudioManager.onPause(()=>{
-        //console.log("暂停")
-        //console.log(this.data.currentAngle)
-      });
-      this.animation.rotate(this.data.currentAngle).step({
-        duration: 10                
-      })
-      this.animation1.rotate(-this.data.currentAngle).step({
-        duration: 10                 
-      })
-      this.setData({
-        animation: this.animation.export(),
-        animation1: this.animation1.export()
-      })
+      if(this.data.musicSrc!==''){
+        backAudioManager.pause();
+        backAudioManager.onPause(()=>{
+          //console.log("暂停")
+          //console.log(this.data.currentAngle)
+        });
+        this.animation.rotate(this.data.currentAngle).step({
+          duration: 10                
+        })
+        this.animation1.rotate(-this.data.currentAngle).step({
+          duration: 10                 
+        })
+        this.setData({
+          animation: this.animation.export(),
+          animation1: this.animation1.export()
+        })
+      }
     }
   },
 
