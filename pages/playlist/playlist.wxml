@@ -4,13 +4,14 @@
     <view class="playlist_info">
         <image src="{{playlist.coverImgUrl}}" mode="widthFix"></image>
         <view class="playlist_detail">
-            <text class="playlist_name">{{playlist.name}}</text>   
+            <text class="playlist_name" bind:tap="playlist_name">{{playlist.name}}</text>   
             <view class="playlist_authorInfo">
                 <image src="{{playlist.creator.avatarUrl}}" mode="widthFix"></image>
                 <text class="author_name">{{playlist.creator.nickname}}</text>
                 <text class="playlist_createTime">{{tools.getDateTime(playlist.createTime,4)}}</text>  
             </view> 
-            <view class="playlist_description" bind:tap="description">{{playlist.description}}</view>
+            <view class="playlist_description" wx:if="{{playlist.description==null}}">什么都没有</view>
+            <view class="playlist_description" wx:else bind:tap="description">{{playlist.description}}</view>
         </view>
     </view>
     <view class="musiclist">
